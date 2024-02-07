@@ -42,3 +42,43 @@ def line(p1: Tuple[int, int], p2: Tuple[int, int]) -> List[Tuple[int, int]]:
             err_y -= dist
 
     return points
+
+def circle(center: Tuple[int, int], radius: int) -> List[Tuple[int, int]]:
+    """
+        Calculates points on circle using Bresenham Algorithm
+
+        :param center: Center of circle
+        :param radius: Radius of circle
+        :return: List of point on circle
+    """
+
+    def points8(x, y):
+        points.add((x0 + x, y0 - y))
+        points.add((x0 + y, y0 - x))
+        points.add((x0 + y, y0 + x))
+        points.add((x0 + x, y0 + y))
+        points.add((x0 - x, y0 + y))
+        points.add((x0 - y, y0 + x))
+        points.add((x0 - y, y0 - x))
+        points.add((x0 - x, y0 - y))
+
+    points = set()
+    x0, y0 = center
+
+    x = 0
+    y = radius
+    d = 3 - 2 * radius
+
+    while x <= y:
+
+        points8(x, y)
+
+        if d < 0:
+            d += 4 * x + 6
+        else:
+            d += 4 * (x - y) + 10
+            y -= 1
+
+        x += 1
+
+    return list(points)
