@@ -1,6 +1,7 @@
 from typing import Tuple, List
 
-def line(p1: Tuple[int, int], p2: Tuple[int, int]) -> List[Tuple[int, int]]:
+def line(p1: Tuple[int, int],
+         p2: Tuple[int, int]) -> List[Tuple[int, int]]:
     """
         Bresenham line
 
@@ -43,7 +44,9 @@ def line(p1: Tuple[int, int], p2: Tuple[int, int]) -> List[Tuple[int, int]]:
 
     return points
 
-def circle(center: Tuple[int, int], radius: int) -> List[Tuple[int, int]]:
+def circle(center: Tuple[int, int],
+           radius: int,
+           thick: bool = False) -> List[Tuple[int, int]]:
     """
         Calculates points on circle using Bresenham Algorithm
 
@@ -75,9 +78,13 @@ def circle(center: Tuple[int, int], radius: int) -> List[Tuple[int, int]]:
 
         if d < 0:
             d += 4 * x + 6
+            if thick:
+                points8(x, y)
         else:
             d += 4 * (x - y) + 10
             y -= 1
+            if thick:
+                points8(x, y)
 
         x += 1
 
